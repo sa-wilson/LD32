@@ -1,4 +1,3 @@
-#include <Windows.h>
 #include "game.h"
 
 char* filetobuf(char *file)
@@ -17,22 +16,25 @@ char* filetobuf(char *file)
 	fread(buf, length, 1, fptr); /* Read the contents of the file in to the buffer */
 	fclose(fptr); /* Close the file */
 	buf[length] = 0; /* Null terminator */
-	
+
 	return buf; /* Return the buffer */
 }
 
-void doGameLoop(GLFWwindow* glfwWindow, FMOD_SYSTEM* fmodSystem)
+void doGameLoop(GLFWwindow* glfwWindow, FMOD_SYSTEM *fmodSystem)
 {
-	int i;
-	GLuint vao, vbo[2];
-	int isCompiled_VS, isCompiled_FS;
-	int isLinked;
-	int maxLength;
-	char *vertexInfoLog;
-	char *fragmentInfoLog;
-	char *shaderProgramInfoLog;
+	GLuint vao,
+	       vbo[2];
 
-	/* We're going to create a simple diamond made from lines */
+	int isCompiled_VS,
+	    isCompiled_FS,
+	    isLinked,
+	    maxLength,
+		frames = 0;
+
+	char *vertexInfoLog,
+	     *fragmentInfoLog,
+	     *shaderProgramInfoLog;
+
 	const GLfloat diamond[5][2] = {
 		{ 0.0, 1.0 }, /* Top point */
 		{ 1.0, 0.0 }, /* Right point */
@@ -47,20 +49,18 @@ void doGameLoop(GLFWwindow* glfwWindow, FMOD_SYSTEM* fmodSystem)
 		{ 1.0, 1.0, 1.0 }, /* White */
 		{ 1.0, 0.0, 0.0 } }; /* Red */
 
-	/* These pointers will receive the contents of our shader source code files */
-	GLchar *vertexsource, *fragmentsource;
-	/* These are handles used to reference the shaders */
-	GLuint vertexshader, fragmentshader;
-	/* This is a handle to the shader program */
-	GLuint shaderprogram;
+	GLchar *vertexsource,
+	       *fragmentsource;
+	GLuint vertexshader,
+	       fragmentshader,
+	       shaderprogram;
 
 	double lastTime = glfwGetTime();
-	int frames = 0;
 
 	fprintf(stdout, "doGameLoop()\n");
 
 	gameState state = GAMESTATE_INIT;
-	
+
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
@@ -126,19 +126,9 @@ void doGameLoop(GLFWwindow* glfwWindow, FMOD_SYSTEM* fmodSystem)
 
 	glUseProgram(shaderprogram);
 
-	/*for (i = 2; i <= 4; i++) {
-		glClearColor(0.0, 0.0, 0.0, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		glDrawArrays(GL_LINE_LOOP, 0, i);
-		glfwSwapBuffers(glfwWindow);
-		Sleep(2000);
-	} */
-
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 
 	state = GAMESTATE_INTRO;
-	/* Play the intro */
 
 	state = GAMESTATE_MENU;
 	do {

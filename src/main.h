@@ -1,8 +1,8 @@
 #pragma once
 
 /* OpenGL */
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 /* FMOD Low-Level API */
 #include <fmod.h>
@@ -13,3 +13,7 @@
 /* C Std Lib */
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifndef __WIN32__
+	#define  sprintf_s snprintf
+#endif

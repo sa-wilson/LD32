@@ -1,7 +1,7 @@
 #pragma once
 #include "main.h"
 
-void doGameLoop(GLFWwindow* glfwWindow, FMOD_SYSTEM* fmodSystem);
+void doGameLoop(GLFWwindow* glfwWindow, FMOD_SYSTEM *fmodSystem);
 
 typedef int gameState;
 

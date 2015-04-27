@@ -1,0 +1,1 @@
+clang -I/usr/local/include/ -I../../lib/FMOD\ Programmers\ API/api/lowlevel/inc/ -L/usr/local/lib/ -L../../lib/FMOD\ Programmers\ API/api/lowlevel/lib/ -lglew -lglfw3 -lfmod -framework opengl ../src/*.c
